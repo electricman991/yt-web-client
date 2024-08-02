@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  tablesFilter: ["yt-web-client_*"],
+  tablesFilter: ["yt_web_client_*"],
 } satisfies Config;

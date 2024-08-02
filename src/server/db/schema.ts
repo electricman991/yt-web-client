@@ -14,7 +14,7 @@ import { type AdapterAccount } from "next-auth/adapters";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = sqliteTableCreator((name) => `yt-web-client_${name}`);
+export const createTable = sqliteTableCreator((name) => `yt_web_client_${name}`);
 
 export const posts = createTable(
   "post",
