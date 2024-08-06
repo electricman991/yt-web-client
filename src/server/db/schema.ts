@@ -114,3 +114,19 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const videos = createTable(
+  "videos",
+  {
+    id: text("id", { length: 255 }).notNull().primaryKey(),
+    uid: text("uid", { length: 255 }),
+    filename: text("filename", { length: 255 }),
+    status: text("status", { length: 255 })
+      .$type<'processing' | 'processed'>(),
+    title: text("title", { length: 255 }),
+    description: text("description"),
+  },
+  (video) => ({
+    userIdIdx: index("videos_uid_idx").on(video.uid),
+  })
+);

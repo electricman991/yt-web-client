@@ -16,7 +16,7 @@ export default async function Navbar() {
 
         { 
           session?.user && <Upload />
-      }
+        }
       </nav>
     );
 }
