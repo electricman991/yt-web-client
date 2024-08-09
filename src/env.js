@@ -30,7 +30,11 @@ export const env = createEnv({
     TURSO_AUTH_TOKEN: z.string(),
     SPACES_KEY: z.string(),
     SPACES_SECRET: z.string(),
-    GOOGLE_APPLICATION_CREDENTIALS: z.string()
+    GOOGLE_APPLICATION_CREDENTIALS: z.string(),
+    GOOGLE_PROJECT_ID: z.string(),
+    PUBSUB_TOPIC: z.string(),
+    SPACES_URL: z.string(),
+    RAW_VIDEO_BUCKET_NAME: z.string(),
   },
 
   /**
@@ -59,7 +63,11 @@ export const env = createEnv({
     TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN,
     SPACES_KEY: process.env.SPACES_KEY,
     SPACES_SECRET: process.env.SPACES_SECRET,
-    GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS
+    GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
+    PUBSUB_TOPIC: process.env.PUBSUB_TOPIC,
+    SPACES_URL: process.env. SPACES_URL,
+    RAW_VIDEO_BUCKET_NAME: process.env.RAW_VIDEO_BUCKET_NAME
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
