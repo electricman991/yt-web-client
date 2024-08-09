@@ -9,7 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
-  generateUploadUrl: s3Router
+  videoUpload: s3Router
 });
 
 // export type definition of API

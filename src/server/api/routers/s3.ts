@@ -22,7 +22,7 @@ export const s3Router = createTRPCRouter({
     .mutation(async ({ input }) => {
       const pubSubClient = new PubSub({
         projectId: env.GOOGLE_PROJECT_ID,
-        keyFilename: env.GOOGLE_APPLICATION_CREDENTIALS,
+        credentials: {client_email: env.GOOGLE_CLIENT_EMAIL, private_key: env.GOOGLE_PRIVATE_KEY}
       });
 
       async function publishMessage() {

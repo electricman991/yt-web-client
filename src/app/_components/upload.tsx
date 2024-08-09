@@ -6,14 +6,9 @@ import styles from "./upload.module.css";
 export default function Upload() {
   const utils = api.useUtils();
 
-  const pubSubMessage = api.generateUploadUrl.uploadSuccess.useMutation();
+  const pubSubMessage = api.videoUpload.uploadSuccess.useMutation();
 
-  const createSignedUrl = api.generateUploadUrl.uploadVideo.useMutation({
-    onSuccess: async () => {
-      await utils.generateUploadUrl.invalidate();
-      alert(`Created signed url successfully`);
-    },
-
+  const createSignedUrl = api.videoUpload.uploadVideo.useMutation({
     onError: async (error) => {
       alert(`Failed to create upload url: ${error.message}`);
     },
