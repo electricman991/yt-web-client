@@ -16,6 +16,7 @@ import {
   users,
   verificationTokens,
 } from "@/server/db/schema";
+import { DefaultSQLiteAccountsTable, DefaultSQLiteSessionsTable, DefaultSQLiteUsersTable, DefaultSQLiteVerificationTokenTable } from "node_modules/@auth/drizzle-adapter/lib/sqlite";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -54,10 +55,10 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: DrizzleAdapter(db, {
-    usersTable: users,
-    accountsTable: accounts,
-    sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
+    usersTable: users as unknown as DefaultSQLiteUsersTable,
+    accountsTable: accounts as unknown as DefaultSQLiteAccountsTable,
+    sessionsTable: sessions as unknown as DefaultSQLiteSessionsTable,
+    verificationTokensTable: verificationTokens as unknown as DefaultSQLiteVerificationTokenTable,
   }) as Adapter,
   providers: [
     DiscordProvider({

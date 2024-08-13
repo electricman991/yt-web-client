@@ -1,5 +1,5 @@
 import { postRouter } from "@/server/api/routers/post";
-import { s3Router } from "@/server/api/routers/s3"
+import { videoRouter } from "@/server/api/routers/video"
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
 /**
@@ -9,7 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
-  videoUpload: s3Router
+  video: videoRouter
 });
 
 // export type definition of API

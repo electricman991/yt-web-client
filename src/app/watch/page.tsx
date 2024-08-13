@@ -1,21 +1,16 @@
+"use client";
 import { api } from "@/trpc/react";
-import { useState } from "react";
-
-
+import { useSearchParams } from "next/navigation";
 
 export default function Watch() {
-    const [extension, setExtension] = useState("");
-    const utils = api.useUtils();
+  const videoPrefix =
+    "https://yt-processed-videos.sfo3.cdn.digitaloceanspaces.com/";
+  const videoSrc = useSearchParams().get("v");
 
-    const createSignedUrl = api.generateUploadUrl.uploadVideo.useMutation({
-        onSuccess: async () => {
-            await utils.generateUploadUrl.invalidate()
-        }
-    })
-    return (
-      <div>
-        <p>Watch Page</p>
-      </div>
-    );
-  }
-  
+  return (
+    <div>
+      <h1>Watch Page</h1>
+      {<video controls src={videoPrefix + videoSrc} />}
+    </div>
+  );
+}

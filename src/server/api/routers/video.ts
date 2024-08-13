@@ -12,7 +12,7 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { PubSub } from "@google-cloud/pubsub";
 import { env } from "@/env";
 
-export const s3Router = createTRPCRouter({
+export const videoRouter = createTRPCRouter({
   uploadSuccess: protectedProcedure
     .input(
       z.object({
@@ -69,4 +69,15 @@ export const s3Router = createTRPCRouter({
       });
       return { url: presignedUrl, filename };
     }),
+
+  getVideos: publicProcedure 
+    .query(
+       async ({ ctx }) => {
+        const videos = await ctx.db.query.videos.findMany({
+          limit: 10
+        })
+
+        return videos ?? null
+      }
+    )
 });

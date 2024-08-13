@@ -6,9 +6,9 @@ import styles from "./upload.module.css";
 export default function Upload() {
   const utils = api.useUtils();
 
-  const pubSubMessage = api.videoUpload.uploadSuccess.useMutation();
+  const pubSubMessage = api.video.uploadSuccess.useMutation();
 
-  const createSignedUrl = api.videoUpload.uploadVideo.useMutation({
+  const createSignedUrl = api.video.uploadVideo.useMutation({
     onError: async (error) => {
       alert(`Failed to create upload url: ${error.message}`);
     },
@@ -18,7 +18,7 @@ export default function Upload() {
     if (!file) {
       throw Error("No file selected");
     }
-    handleUpload(file);
+    handleUpload(file).catch((err: Error) => err);
   };
 
   const handleUpload = async (file: File) => {
@@ -38,12 +38,12 @@ export default function Upload() {
         await pubSubMessage.mutateAsync({ filename: filename });
         alert(
           `File uploaded successfully. Server responded with: ${JSON.stringify(
-            response
-          )}`
+            response,
+          )}`,
         );
       }
     } catch (error) {
-      alert(`Failed to upload file: ${error}`);
+      alert(`Failed to upload file: ${String(error)}`);
     }
   };
 
@@ -63,7 +63,7 @@ export default function Upload() {
           viewBox="0 0 24 24"
           strokeWidth={1.2}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <path
             strokeLinecap="round"
