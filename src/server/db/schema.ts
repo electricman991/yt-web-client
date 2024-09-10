@@ -130,3 +130,17 @@ export const videos = createTable(
     userIdIdx: index("videos_uid_idx").on(video.uid),
   })
 );
+
+export const comments = createTable(
+  "comments",
+  {
+    id: int("id").notNull().primaryKey(),
+    videoId: text("video_id", { length: 255 }).notNull(),
+    userId: text("user_id", { length: 255 }).notNull(),
+    username: text("username", { length: 255 }).notNull(),
+    content: text("content"),
+  },
+  (comment) => ({
+    videoIdIdx: index("comments_video_idx").on(comment.videoId),
+  })
+)

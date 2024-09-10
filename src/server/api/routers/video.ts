@@ -11,6 +11,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { PubSub } from "@google-cloud/pubsub";
 import { env } from "@/env";
+import { comments, videos, users } from "@/server/db/schema";
 
 export const videoRouter = createTRPCRouter({
   uploadSuccess: protectedProcedure
@@ -79,5 +80,30 @@ export const videoRouter = createTRPCRouter({
 
         return videos ?? null
       }
-    )
+    ),
+
+  setComment: protectedProcedure
+  .input(
+    z.object({
+      videoId: z.string(),
+      commentText: z.string()
+    })
+  )
+  .mutation(async ({ ctx, input }) => {
+     const video = await ctx.db.select().from(videos)
+
+     const videoid = video[0]?.id!
+
+     const user = await ctx.db.select().from(users)
+
+     const userId = user[0]?.id!
+     const username = user[0]?.name!
+     await ctx.db.insert(comments).values({username: username, videoId: videoid, userId: userId, content: input.commentText})
+  }),
+
+  getComments: publicProcedure
+    .query(async ({ ctx }) => {
+      const comments_query = await ctx.db.query.comments.findMany()
+      return comments_query ?? null
+      })
 });

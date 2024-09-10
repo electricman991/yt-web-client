@@ -37,6 +37,7 @@ export const env = createEnv({
     PUBSUB_TOPIC: z.string(),
     SPACES_URL: z.string(),
     RAW_VIDEO_BUCKET_NAME: z.string(),
+    PROCESSED_SPACES_URL: z.string(),
   },
 
   /**
@@ -71,7 +72,8 @@ export const env = createEnv({
     GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
     PUBSUB_TOPIC: process.env.PUBSUB_TOPIC,
     SPACES_URL: process.env. SPACES_URL,
-    RAW_VIDEO_BUCKET_NAME: process.env.RAW_VIDEO_BUCKET_NAME
+    RAW_VIDEO_BUCKET_NAME: process.env.RAW_VIDEO_BUCKET_NAME,
+    PROCESSED_SPACES_URL: process.env.PROCESSED_SPACES_URL
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
