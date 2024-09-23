@@ -1,29 +1,25 @@
-# Create T3 App
+# Video Upload Service
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is an application that allows video file uploading and viewing of videos. This is a project to help showcase a fullstack application using NextJS with 
+Golang handling the backend of processing the videos. See this [repo](https://github.com/electricman991/video-processing-service) for a full look at the video processing service.
 
-## What's next? How do I make an app with this?
+## Using Google Pub/Sub for sending notifications of a video upload
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+When a user uploads a video a notification is sent to the backend processing service. Once the video has been processed it will then be viewable by the user. 
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+# Frontend Client
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+The web client allows for users to view and upload video files. The home page pulls 10 videos from the database so a better version could use pagination or 
+allow for a better algorithim when selecting what videos to show.
 
-## Learn More
+# Backend Function Calls
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+The first function calls when a file is uploaded to the Object Storage location. It then sends a pub/sub message so that the video can be processed by the video-processing-service. The code can be found in src/server/api/routers/video.ts
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+The second call named **uploadVideo** creates a presigned url for uplaoding to object storage. 
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+The third function queries the database and will get 10 videos from the database.
 
-## How do I deploy this?
+# Watch Page
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Once a video is click it will go to a watch page where the video will be downloaded and playable by the user. 
